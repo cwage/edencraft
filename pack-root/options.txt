@@ -170,7 +170,7 @@ key_key.civmodern.left:key.keyboard.minus
 key_key.civmodern.right:key.keyboard.equal
 key_key.civmodern.attack:key.keyboard.0
 key_key.civmodern.ice:key.keyboard.backspace
-key_key.civmodern.map:key.keyboard.m
+key_key.civmodern.map:key.keyboard.unknown
 key_key.civmodern.minimapzoom:key.keyboard.keypad.divide
 key_key.journeymap.minimap_preset:key.keyboard.backslash
 key_key.journeymap.toggle_entity_names:key.keyboard.g
@@ -203,7 +203,7 @@ key_key.snitchmod.toggleSnitchGoneStatusKey:key.keyboard.delete
 key_key.snitchmod.jalistAuto:key.keyboard.j
 key_key.push_to_talk:key.keyboard.unknown
 key_key.whisper:key.keyboard.unknown
-key_key.mute_microphone:key.keyboard.m
+key_key.mute_microphone:key.keyboard.unknown
 key_key.disable_voice_chat:key.keyboard.n
 key_key.hide_icons:key.keyboard.h
 key_key.voice_chat:key.keyboard.v
