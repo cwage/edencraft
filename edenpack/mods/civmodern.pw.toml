@@ -1,0 +1,13 @@
+name = "CivModern"
+filename = "civmodern-2.0.0-beta.12.jar"
+side = "client"
+
+[download]
+url = "https://cdn.modrinth.com/data/tF3LNnBc/versions/f5N3TG1b/civmodern-2.0.0-beta.12.jar"
+hash-format = "sha512"
+hash = "e0076a4839bffb04be6b48026398a09c7670edcbde52003acee6b3fd48e542cff023c66861c0c5a9164aeed44cd23b52b784fac57c773c278638aa8682d4b29f"
+
+[update]
+[update.modrinth]
+mod-id = "tF3LNnBc"
+version = "f5N3TG1b"

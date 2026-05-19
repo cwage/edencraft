@@ -1,0 +1,124 @@
+mods:
+  # --- Core / libraries ---
+  - name: "Fabric API"
+    slug: fabric-api
+    mr: P7dR8mSH
+    cf:
+  - name: "Cloth Config API"
+    slug: cloth-config
+    mr: 9s6osm5g
+    cf:
+  - name: "owo-lib"
+    slug: owo-lib
+    mr: ccKDOlHs
+    cf:
+  - name: "malilib"
+    slug: malilib
+    mr: malilib
+    cf:
+  - name: "Bad Packets"
+    slug: badpackets
+    mr: badpackets
+    cf:
+  - name: "YetAnotherConfigLib (YACL)"
+    slug: yacl
+    mr: 1eAoo2KR
+    cf:
+  - name: "Forge Config API Port"
+    slug: forge-config-api-port
+    mr: ohNO6lps
+    cf:
+  - name: "Puzzles Lib"
+    slug: puzzles-lib
+    mr: QAGBst4M
+    cf:
+  - name: "Fabric Language Kotlin"
+    slug: fabric-language-kotlin
+    mr: Ha28R6CL
+    cf:
+
+  # --- Eden Main Mods ---
+  # Combat Radar intentionally omitted: CivModern includes a radar.
+  - name: "Bobby"
+    slug: bobby
+    mr: bobby
+    cf:
+  - name: "CivModern"
+    slug: civmodern
+    mr: tF3LNnBc
+    cf:
+  - name: "Simple Voice Chat"
+    slug: simple-voice-chat
+    mr: simple-voice-chat
+    cf:
+  - name: "Snitch Mod"
+    slug: snitch-mod
+    mr: snitch-mod
+    cf:
+  - name: "Voxy"
+    slug: voxy
+    mr: voxy
+    cf:
+  - name: "Xaero's World Map"
+    slug: xaeros-world-map
+    mr: xaeros-world-map
+    cf:
+  - name: "Xaero's Minimap"
+    slug: xaeros-minimap
+    mr: xaeros-minimap
+    cf:
+
+  # --- Eden QOL Mods ---
+  - name: "AppleSkin"
+    slug: appleskin
+    mr: appleskin
+    cf:
+  - name: "Chat Heads"
+    slug: chat-heads
+    mr: chat-heads
+    cf:
+  - name: "Chat Patches"
+    slug: chatpatches
+    mr: chatpatches
+    cf:
+  - name: "Litematica"
+    slug: litematica
+    mr: litematica
+    cf:
+  - name: "Mod Menu"
+    slug: modmenu
+    mr: mOgUt4GM
+    cf:
+  - name: "Mouse Tweaks"
+    slug: mouse-tweaks
+    mr: mouse-tweaks
+    cf:
+  - name: "Pick Up Notifier"
+    slug: pick-up-notifier
+    mr: pick-up-notifier
+    cf:
+  - name: "SchematicPreview"
+    slug: schematicpreview
+    mr: schematicpreview
+    cf:
+  - name: "Sodium"
+    slug: sodium
+    mr: AANobbMI
+    mr_version: CL53p97Z  # 0.8.11 — pinned because Voxy 0.2.15-beta rejects 0.8.12
+    cf:
+  - name: "Iris Shaders"
+    slug: iris
+    mr: YL57xq9U
+    cf:
+  - name: "XaeroPlus"
+    slug: xaeroplus
+    mr: xaeroplus
+    cf:
+  - name: "Border Limit Xaero's"
+    slug: border-limit-xaeros
+    mr: border-limit-xaeros
+    cf:
+  - name: "Zoomify"
+    slug: zoomify
+    mr: zoomify
+    cf:

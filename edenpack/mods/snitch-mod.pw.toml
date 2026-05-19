@@ -1,0 +1,13 @@
+name = "Snitch Mod"
+filename = "snitchmod-1.5.0-mc1.21.11-fabric.jar"
+side = "client"
+
+[download]
+url = "https://cdn.modrinth.com/data/HyNynWyD/versions/AuSDAc4u/snitchmod-1.5.0-mc1.21.11-fabric.jar"
+hash-format = "sha512"
+hash = "5018d998b20da39286f75e5a34c4c20ed2e416af927f0ecb7a0bcd13a22f7969085164d9504ee6ff0c33e62d62bcba0a4370ef9a2f171533f75697fec53bd4dd"
+
+[update]
+[update.modrinth]
+mod-id = "HyNynWyD"
+version = "AuSDAc4u"
