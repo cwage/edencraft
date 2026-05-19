@@ -27,8 +27,10 @@ Tagged releases (`v*`) trigger `.github/workflows/release.yml`, which builds the
 To cut a release locally:
 
 ```
-git tag v1.0.0 && git push --tags
+git tag v1.0.0 && git push origin v1.0.0
 ```
+
+Push the specific tag, not `--tags` — the latter would push every local tag at once and accidentally fire the release workflow for any stale ones.
 
 The tag's leading `v` is stripped before being written into `pack.toml` / the mrpack manifest (so `v1.0.0` → `versionId: 1.0.0`), but the release asset filename keeps the tag verbatim.
 

@@ -7,7 +7,16 @@ PACK_NAME="edenpack"
 MC_VERSION="1.21.11"
 # Pack version written into pack.toml and (downstream) the mrpack manifest.
 # CI overrides via PACK_VERSION env var; locally it stays at the dev value.
+# Restrict to chars that are safe to splice into a sed replacement and into
+# pack.toml's TOML string: alnum plus . _ + -. Rejects /, &, quotes, spaces,
+# and other shell/sed metacharacters that could corrupt pack.toml or fail the
+# substitution if a tag ever contained them.
 PACK_VERSION="${PACK_VERSION:-0.0.1}"
+if [[ ! "$PACK_VERSION" =~ ^[A-Za-z0-9._+-]+$ ]]; then
+  echo "ERROR: PACK_VERSION '$PACK_VERSION' contains unsupported characters." >&2
+  echo "       Allowed: letters, digits, and the characters . _ + -" >&2
+  exit 1
+fi
 
 # Modloader selection: fabric | neoforge | forge
 MODLOADER="fabric"
