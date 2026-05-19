@@ -20,6 +20,20 @@ Mod list is curated from Eden's [Recommended Mods](https://edenmc.miraheze.org/w
 
 Import the resulting `edenpack.mrpack` into Prism / PolyMC / Modrinth App.
 
+### Releases
+
+Tagged releases (`v*`) trigger `.github/workflows/release.yml`, which builds the pack in CI and attaches `edenpack-<tag>.mrpack` plus a SHA-256 sum to a GitHub Release. Pull the latest from [Releases](https://github.com/cwage/edencraft/releases) instead of building locally if you just want to play.
+
+To cut a release locally:
+
+```
+git tag v1.0.0 && git push origin v1.0.0
+```
+
+Push the specific tag, not `--tags` — the latter would push every local tag at once and accidentally fire the release workflow for any stale ones.
+
+The tag's leading `v` is stripped before being written into `pack.toml` / the mrpack manifest (so `v1.0.0` → `versionId: 1.0.0`), but the release asset filename keeps the tag verbatim.
+
 ## What's bundled
 
 - All 26 mods listed in `mods.yaml`, downloaded by the launcher on import.

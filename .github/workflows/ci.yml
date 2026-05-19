@@ -1,0 +1,41 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: 'stable'
+
+      - name: Install packwiz
+        run: go install github.com/packwiz/packwiz@latest
+
+      - name: Build mrpack
+        run: ./setup.sh
+
+      - name: Verify mrpack
+        run: |
+          test -s edenpack.mrpack
+          # mrpack is a zip with modrinth.index.json at the root — parse it
+          # to confirm it's well-formed and report the mod count.
+          python3 - <<'PY'
+          import json, zipfile, sys
+          with zipfile.ZipFile("edenpack.mrpack") as z:
+              with z.open("modrinth.index.json") as f:
+                  d = json.load(f)
+          print(f"name={d['name']} version={d['versionId']}")
+          print(f"deps={d['dependencies']}")
+          print(f"remote files: {len(d['files'])}")
+          overrides = [n for n in z.namelist() if n.startswith('overrides/') and not n.endswith('/')]
+          print(f"overrides: {len(overrides)}")
+          for o in sorted(overrides):
+              print(f"  {o}")
+          PY
