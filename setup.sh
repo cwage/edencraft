@@ -168,10 +168,11 @@ else
   fi
 fi
 
-# Copy any locally-stashed shader packs (and similar resource bundles) from the
-# repo root into the pack dir so packwiz tracks them as overrides in the mrpack.
-# Source dirs live at repo root so they survive `rm -rf $PACK_DIR` between runs.
-for asset_dir in shaderpacks resourcepacks; do
+# Copy locally-stashed assets (shaders, resource packs, config defaults) from
+# the repo root into the pack dir so packwiz tracks them as overrides in the
+# mrpack. Source dirs live at repo root so they survive `rm -rf $PACK_DIR`
+# between runs. `config/` supports subdirectories (e.g. config/civmodern/...).
+for asset_dir in shaderpacks resourcepacks config; do
   src="$OUT_DIR/$asset_dir"
   [[ -d "$src" ]] || continue
   shopt -s nullglob
@@ -180,7 +181,7 @@ for asset_dir in shaderpacks resourcepacks; do
   [[ ${#files[@]} -eq 0 ]] && continue
   echo "==> Staging $asset_dir/ ($(printf '%s\n' "${files[@]##*/}" | tr '\n' ' '))"
   mkdir -p "$PACK_DIR/$asset_dir"
-  cp -u "${files[@]}" "$PACK_DIR/$asset_dir/"
+  cp -ru "${files[@]}" "$PACK_DIR/$asset_dir/"
 done
 
 # Index helpers

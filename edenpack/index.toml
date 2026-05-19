@@ -1,6 +1,10 @@
 hash-format = "sha256"
 
 [[files]]
+file = "config/civmodern.properties"
+hash = "8bd833a660338dbc8a7180c97e603edabf626f5120cf78ff27a2f1047eb27df5"
+
+[[files]]
 file = "mods/appleskin.pw.toml"
 hash = "ca3ae2608987185814c118388f28057f729d866ee1abbc97f3650141d213fa35"
 metafile = true
