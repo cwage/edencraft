@@ -135,5 +135,9 @@ hash = "0d3405e537262b4afe76df6c9a884d1a7acbf5b6152109f4cc14b76a3551af7b"
 metafile = true
 
 [[files]]
+file = "options.txt"
+hash = "1df775e78e9dd58a170a8e6ac950bc909437c038473f0aafa2d68273650875b1"
+
+[[files]]
 file = "shaderpacks/ComplementaryUnbound_r5.5.1.zip"
 hash = "61d133b24b6a92e46a3d7df791bb2ff163bbba10eed59df979b9bd727c24fbaf"

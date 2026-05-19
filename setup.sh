@@ -190,6 +190,22 @@ for asset_dir in shaderpacks resourcepacks config; do
   cp -r "${files[@]}" "$PACK_DIR/$asset_dir/"
 done
 
+# pack-root/ is for single files that need to live at the root of .minecraft/
+# (not inside config/, shaderpacks/, etc.) — e.g. options.txt for default
+# keybinds. Only flat files are staged; ignore any subdirs.
+if [[ -d "$OUT_DIR/pack-root" ]]; then
+  shopt -s nullglob
+  root_files=("$OUT_DIR/pack-root"/*)
+  shopt -u nullglob
+  for src_file in "${root_files[@]}"; do
+    [[ -f "$src_file" ]] || continue
+    fname="${src_file##*/}"
+    echo "==> Staging pack-root/$fname"
+    rm -f "$PACK_DIR/$fname"
+    cp "$src_file" "$PACK_DIR/$fname"
+  done
+fi
+
 # Index helpers
 declare -A IDX_MR IDX_CF IDX_SLUG
 
