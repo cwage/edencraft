@@ -172,6 +172,11 @@ fi
 # the repo root into the pack dir so packwiz tracks them as overrides in the
 # mrpack. Source dirs live at repo root so they survive `rm -rf $PACK_DIR`
 # between runs. `config/` supports subdirectories (e.g. config/civmodern/...).
+#
+# We wipe the destination before copying so the repo root is the single source
+# of truth: deletions/renames propagate, and `cp -u`-style mtime races (where a
+# committed-and-checked-out dest looks "newer" than a freshly edited source)
+# can't silently skip an update.
 for asset_dir in shaderpacks resourcepacks config; do
   src="$OUT_DIR/$asset_dir"
   [[ -d "$src" ]] || continue
@@ -180,8 +185,9 @@ for asset_dir in shaderpacks resourcepacks config; do
   shopt -u nullglob
   [[ ${#files[@]} -eq 0 ]] && continue
   echo "==> Staging $asset_dir/ ($(printf '%s\n' "${files[@]##*/}" | tr '\n' ' '))"
+  rm -rf "$PACK_DIR/$asset_dir"
   mkdir -p "$PACK_DIR/$asset_dir"
-  cp -ru "${files[@]}" "$PACK_DIR/$asset_dir/"
+  cp -r "${files[@]}" "$PACK_DIR/$asset_dir/"
 done
 
 # Index helpers
