@@ -168,10 +168,16 @@ else
   fi
 fi
 
-# Copy any locally-stashed shader packs (and similar resource bundles) from the
-# repo root into the pack dir so packwiz tracks them as overrides in the mrpack.
-# Source dirs live at repo root so they survive `rm -rf $PACK_DIR` between runs.
-for asset_dir in shaderpacks resourcepacks; do
+# Copy locally-stashed assets (shaders, resource packs, config defaults) from
+# the repo root into the pack dir so packwiz tracks them as overrides in the
+# mrpack. Source dirs live at repo root so they survive `rm -rf $PACK_DIR`
+# between runs. `config/` supports subdirectories (e.g. config/civmodern/...).
+#
+# We wipe the destination before copying so the repo root is the single source
+# of truth: deletions/renames propagate, and `cp -u`-style mtime races (where a
+# committed-and-checked-out dest looks "newer" than a freshly edited source)
+# can't silently skip an update.
+for asset_dir in shaderpacks resourcepacks config; do
   src="$OUT_DIR/$asset_dir"
   [[ -d "$src" ]] || continue
   shopt -s nullglob
@@ -179,9 +185,26 @@ for asset_dir in shaderpacks resourcepacks; do
   shopt -u nullglob
   [[ ${#files[@]} -eq 0 ]] && continue
   echo "==> Staging $asset_dir/ ($(printf '%s\n' "${files[@]##*/}" | tr '\n' ' '))"
+  rm -rf "$PACK_DIR/$asset_dir"
   mkdir -p "$PACK_DIR/$asset_dir"
-  cp -u "${files[@]}" "$PACK_DIR/$asset_dir/"
+  cp -r "${files[@]}" "$PACK_DIR/$asset_dir/"
 done
+
+# pack-root/ is for single files that need to live at the root of .minecraft/
+# (not inside config/, shaderpacks/, etc.) — e.g. options.txt for default
+# keybinds. Only flat files are staged; ignore any subdirs.
+if [[ -d "$OUT_DIR/pack-root" ]]; then
+  shopt -s nullglob
+  root_files=("$OUT_DIR/pack-root"/*)
+  shopt -u nullglob
+  for src_file in "${root_files[@]}"; do
+    [[ -f "$src_file" ]] || continue
+    fname="${src_file##*/}"
+    echo "==> Staging pack-root/$fname"
+    rm -f "$PACK_DIR/$fname"
+    cp "$src_file" "$PACK_DIR/$fname"
+  done
+fi
 
 # Index helpers
 declare -A IDX_MR IDX_CF IDX_SLUG

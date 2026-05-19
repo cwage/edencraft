@@ -59,13 +59,9 @@ mods:
     slug: voxy
     mr: voxy
     cf:
-  - name: "Xaero's World Map"
-    slug: xaeros-world-map
-    mr: xaeros-world-map
-    cf:
-  - name: "Xaero's Minimap"
-    slug: xaeros-minimap
-    mr: xaeros-minimap
+  - name: "JourneyMap"
+    slug: journeymap
+    mr: lfHFW1mp
     cf:
 
   # --- Eden QOL Mods ---
@@ -109,14 +105,6 @@ mods:
   - name: "Iris Shaders"
     slug: iris
     mr: YL57xq9U
-    cf:
-  - name: "XaeroPlus"
-    slug: xaeroplus
-    mr: xaeroplus
-    cf:
-  - name: "Border Limit Xaero's"
-    slug: border-limit-xaeros
-    mr: border-limit-xaeros
     cf:
   - name: "Zoomify"
     slug: zoomify
