@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# edenpack builder/exporter — Eden MC (Fabric, MC 1.21.8)
+# edenpack builder/exporter — Eden MC (Fabric, MC 1.21.11)
 
 PACK_NAME="edenpack"
 MC_VERSION="1.21.11"
+# Pack version written into pack.toml and (downstream) the mrpack manifest.
+# CI overrides via PACK_VERSION env var; locally it stays at the dev value.
+PACK_VERSION="${PACK_VERSION:-0.0.1}"
 
 # Modloader selection: fabric | neoforge | forge
 MODLOADER="fabric"
@@ -94,7 +97,7 @@ init_pack() {
           ${REINIT:+-r} \
           --name "$PACK_NAME" \
           --author "$AUTHOR" \
-          --version "0.0.1" \
+          --version "$PACK_VERSION" \
           --mc-version "$MC_VERSION" \
           --modloader fabric \
           --fabric-version "$FABRIC_LOADER" && ok=true && break ;;
@@ -103,7 +106,7 @@ init_pack() {
           ${REINIT:+-r} \
           --name "$PACK_NAME" \
           --author "$AUTHOR" \
-          --version "0.0.1" \
+          --version "$PACK_VERSION" \
           --mc-version "$MC_VERSION" \
           --modloader neoforge \
           --neoforge-version "$NEOFORGE_VERSION" && ok=true && break ;;
@@ -112,7 +115,7 @@ init_pack() {
           ${REINIT:+-r} \
           --name "$PACK_NAME" \
           --author "$AUTHOR" \
-          --version "0.0.1" \
+          --version "$PACK_VERSION" \
           --mc-version "$MC_VERSION" \
           --modloader forge \
           --forge-version "${FORGE_VERSION:?Forge version required for --modloader forge}" && ok=true && break ;;
@@ -166,6 +169,16 @@ else
   else
     echo "    ✓ Loader/MC versions OK ($current_loader_key $current_loader_version, MC $current_mc_version)"
   fi
+fi
+
+# Sync pack.toml version. Needed because packwiz only writes the version at
+# init time, and the pack dir is committed — so on a fresh clone the version
+# is whatever was last committed regardless of $PACK_VERSION. Release CI sets
+# PACK_VERSION from the git tag; locally this is a no-op against "0.0.1".
+current_pack_version=$(awk -F'"' '/^version *=/{print $2; exit}' "$PACK_DIR/pack.toml" || true)
+if [[ "$current_pack_version" != "$PACK_VERSION" ]]; then
+  echo "==> Setting pack version to $PACK_VERSION (was $current_pack_version)"
+  sed -i "s/^version = \".*\"$/version = \"$PACK_VERSION\"/" "$PACK_DIR/pack.toml"
 fi
 
 # Copy locally-stashed assets (shaders, resource packs, config defaults) from
