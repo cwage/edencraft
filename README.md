@@ -7,7 +7,7 @@ Mod list is curated from Eden's [Recommended Mods](https://edenmc.miraheze.org/w
 ## Status
 
 - Target: Minecraft 1.21.11, Fabric 0.19.2
-- Mods: 29 (24 from Eden's list + 4 transitive deps + Iris)
+- Mods: 26 (Eden's list minus Xaero family + JourneyMap + 4 transitive deps + Iris)
 - Output: `./edenpack.mrpack` (Modrinth format)
 
 ## Usage
@@ -25,7 +25,7 @@ Import the resulting `edenpack.mrpack` into Prism / PolyMC / Modrinth App.
 - All 29 mods listed in `mods.yaml`, downloaded by the launcher on import.
 - Sodium pinned to 0.8.11 via `mr_version:` (Voxy 0.2.15-beta rejects 0.8.12).
 - **`shaderpacks/ComplementaryUnbound_r5.5.1.zip`** — bundled inline as an override; auto-installs to the client's shaderpacks folder. Enable in Video Settings → Shaders.
-- **`config/civmodern.properties`** — pre-configured CivModern layout (radar bottom-right). Bundled as a config override so every fresh import starts with a sane default.
+- **`config/civmodern.properties`** — pre-configured CivModern layout (radar bottom-right, built-in minimap disabled since JourneyMap fills that role). Bundled as a config override so every fresh import starts with a sane default.
 
 ## Project layout
 
@@ -42,13 +42,13 @@ Import the resulting `edenpack.mrpack` into Prism / PolyMC / Modrinth App.
 ## Intentional omissions
 
 - **Combat Radar** — CivModern already includes a radar.
-- **JourneyMap** — Eden's wiki recommends Xaero's World Map + Minimap instead.
+- **Xaero's Minimap / World Map / XaeroPlus / Border Limit** — Eden's wiki recommends Xaero's, but we ship JourneyMap instead (preference, more mature codebase). JM and Xaero's are equally rule-compliant when configured; this is a deliberate trade-off — most of the Eden community uses Xaero's.
+- **CivModern's built-in minimap** — disabled in our bundled config; JourneyMap fills that role.
 - **Indium** — obsolete since Sodium 0.6 (which now ships native Fabric Rendering API support).
 
 ## Config notes for rule compliance
 
 Most rule-compliance comes for free, but a couple of items need a config tweak after first launch — see [Eden's rules](https://edenmc.miraheze.org/wiki/Rules):
 
-- **Xaero's Minimap & World Map** — cave mode is allowed *only in the Nether*. Disable cave mode for the overworld in both mods (settings live separately per mod: minimap config via `Y`, world map config via `M` then the cog).
-- **CivModern minimap** — defaults to top-right, overlaps with Xaero's. Bundled config keeps it enabled; toggle off in ESC → Mod Menu → CivModern → Map if you'd rather only have Xaero's.
+- **JourneyMap** — cave mode is allowed *only in the Nether*. In each non-Nether dimension, open the full map (`J` by default), click the gear → "Dimensions" → set cave layers off. Also under Map Options, hide Y-coordinate of other entities (Eden rules allow type/item/name/X/Z only, not Y).
 - **Litematica** — printer / automatic block placement is only for vanity builds that don't affect gameplay.
